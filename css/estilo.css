@@ -1,0 +1,101 @@
+/* ===== Cores principais (troque aqui) ===== */
+:root {
+  --azul: #1f4e78;
+  --azul-claro: #e8eff6;
+  --texto: #1d2733;
+  --cinza: #6b7684;
+  --borda: #d9dee4;
+  --fundo: #f4f6f8;
+  --ok: #1e7b3c;     --ok-fundo: #dff3e4;
+  --alerta: #8a6100; --alerta-fundo: #fff1c7;
+  --erro: #b3261e;   --erro-fundo: #fde0de;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--texto); background: var(--fundo); font-size: 15px; line-height: 1.45;
+}
+
+.topo { background: var(--azul); color: #fff; padding: 18px 28px; }
+.topo .marca { font-size: 22px; font-weight: 700; letter-spacing: .5px; }
+.topo .marca span { font-weight: 400; opacity: .85; }
+.topo p { margin: 4px 0 0; opacity: .85; }
+
+main { max-width: 1080px; margin: 24px auto; padding: 0 16px; }
+.painel {
+  background: #fff; border: 1px solid var(--borda); border-radius: 10px;
+  padding: 20px 24px; margin-bottom: 18px;
+}
+h2 { margin: 0 0 14px; font-size: 18px; color: var(--azul); }
+h3 { margin: 22px 0 8px; font-size: 15px; color: var(--azul); }
+
+/* Caixas de arquivo */
+.caixas { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.caixa {
+  display: flex; flex-direction: column; gap: 6px; padding: 16px;
+  border: 2px dashed var(--borda); border-radius: 8px; cursor: pointer;
+}
+.caixa:hover { border-color: var(--azul); }
+.caixa.preenchida { border-style: solid; border-color: var(--ok); background: var(--ok-fundo); }
+.caixa .rotulo { font-weight: 600; }
+.caixa input { display: none; }
+.caixa .nome { color: var(--cinza); font-size: 13px; word-break: break-all; }
+
+button {
+  font: inherit; padding: 9px 18px; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--azul); background: #fff; color: var(--azul);
+}
+button.primario { background: var(--azul); color: #fff; font-weight: 600; }
+button:disabled { opacity: .6; cursor: wait; }
+.aviso { color: var(--cinza); font-size: 13px; margin: 10px 0 0; }
+.regras { margin-top: 12px; font-size: 14px; }
+.regras summary { cursor: pointer; color: var(--azul); }
+
+#log {
+  background: #10161d; color: #cfe3f5; padding: 12px; border-radius: 6px;
+  max-height: 220px; overflow: auto; font-size: 12.5px; margin: 0; white-space: pre-wrap;
+}
+
+.acoes { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 10px; }
+
+/* Relatório */
+.cab-relatorio { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  border-bottom: 2px solid var(--azul); padding-bottom: 12px; }
+.cab-relatorio h2 { margin: 0; }
+.sub { margin: 2px 0 0; color: var(--cinza); }
+.dados { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin: 16px 0; }
+.dados dt { font-size: 12px; color: var(--cinza); }
+.dados dd { margin: 0; font-weight: 600; word-break: break-word; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th { background: var(--azul-claro); color: var(--azul); text-align: left; padding: 7px 8px; }
+td { border-bottom: 1px solid var(--borda); padding: 7px 8px; vertical-align: top; }
+.num { text-align: center; white-space: nowrap; }
+.todas { margin-top: 18px; }
+.todas summary { cursor: pointer; color: var(--azul); margin-bottom: 8px; }
+
+.selo { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.selo.grande { font-size: 16px; padding: 6px 14px; }
+.OK, .APROVADO   { background: var(--ok-fundo); color: var(--ok); }
+.ALERTA, .VERIFICAR { background: var(--alerta-fundo); color: var(--alerta); }
+.ERRO, .REPROVADO { background: var(--erro-fundo); color: var(--erro); }
+
+.assinatura-analista { display: flex; gap: 40px; margin-top: 48px; }
+.assinatura-analista div { flex: 1; text-align: center; color: var(--cinza); font-size: 13px; }
+.assinatura-analista span { display: block; border-top: 1px solid var(--texto); margin-bottom: 4px; }
+
+@media (max-width: 700px) {
+  .caixas, .dados { grid-template-columns: 1fr; }
+}
+
+/* Impressão: só o relatório */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { background: #fff; }
+  .topo, .nao-imprimir { display: none !important; }
+  main { margin: 0; max-width: none; }
+  .painel { border: none; padding: 0; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr { break-inside: avoid; }
+}
